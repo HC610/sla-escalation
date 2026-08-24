@@ -26,6 +26,7 @@ A check that scans all open tickets, identifies any ticket where no first respon
 4. Implement the CLI entry point that loads `tickets.json`, applies `is_breached` + `escalate` to each ticket, writes updated `tickets.json`, and appends to `escalations.log`. Commit.
 5. Add an end-to-end test that runs the CLI twice against the fixture file and asserts: exactly the breaching and boundary tickets are escalated, the log has exactly those entries, and the second run produces no new log entries or changes. Commit.
 6. Add a `status` field to the ticket schema (defaulting existing fixtures to `"open"`, plus one new fixture ticket that is `"closed"`, unresponded, and past 120 hours old) and update `is_breached` to return `false` for any ticket where `status != "open"`, with a unit test covering the closed-but-overdue fixture ticket and an end-to-end test asserting it's never escalated. Schema/fixture data and the filtering logic land together so the commit is never red. Commit.
+7. Add a `README.md` documenting the escalation rule, the ticket JSON format, CLI usage (`python3 -m sla_escalation.cli [--tickets PATH] [--log PATH]`), and how to run the tests. Verify the documented commands actually work before committing. Commit.
 
 ## Done
 - Running the CLI against `fixtures/tickets.json` escalates exactly the open tickets with no first response at 120+ hours old, and no others — closed tickets are never escalated regardless of age.
