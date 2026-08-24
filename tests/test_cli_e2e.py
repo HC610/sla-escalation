@@ -38,6 +38,9 @@ def test_running_cli_twice_escalates_once_and_is_idempotent(tmp_path):
     # already-escalated before the run: untouched, keeps its original escalated_at
     assert tickets_after_first["T-1004"]["escalated"] is True
     assert tickets_after_first["T-1004"]["escalated_at"] == "2026-08-20T12:00:00Z"
+    # closed and overdue: must never be escalated regardless of age
+    assert tickets_after_first["T-1005"]["escalated"] is False
+    assert tickets_after_first["T-1005"]["escalated_at"] is None
 
     tickets_snapshot = tickets_path.read_text()
 

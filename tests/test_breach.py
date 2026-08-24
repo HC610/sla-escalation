@@ -34,9 +34,14 @@ def test_no_breach_when_already_escalated():
     assert is_breached(load_ticket("T-1004"), NOW) is False
 
 
+def test_no_breach_when_ticket_closed():
+    assert is_breached(load_ticket("T-1005"), NOW) is False
+
+
 def test_breach_raises_on_missing_created_at():
     ticket = {
         "id": "T-9999",
+        "status": "open",
         "created_at": None,
         "first_response_at": None,
         "escalated": False,

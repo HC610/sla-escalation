@@ -17,6 +17,9 @@ def is_breached(ticket: dict, now: datetime) -> bool:
     timestamp with timezone info — callers must treat that as a per-ticket
     error to skip and log, not a reason to fail the whole run.
     """
+    if ticket.get("status") != "open":
+        return False
+
     if ticket.get("escalated"):
         return False
 

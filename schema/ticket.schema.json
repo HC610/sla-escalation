@@ -2,12 +2,17 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Ticket",
   "type": "object",
-  "required": ["id", "created_at", "first_response_at", "escalated", "escalated_at"],
+  "required": ["id", "status", "created_at", "first_response_at", "escalated", "escalated_at"],
   "additionalProperties": false,
   "properties": {
     "id": {
       "type": "string",
       "description": "Unique ticket identifier."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "closed"],
+      "description": "Ticket lifecycle status. Only 'open' tickets are eligible for SLA breach checks."
     },
     "created_at": {
       "type": "string",
